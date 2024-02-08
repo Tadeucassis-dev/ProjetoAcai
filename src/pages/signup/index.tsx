@@ -3,27 +3,11 @@ import Image from 'next/image'
 import { Box } from "@chakra-ui/react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import styles from '../styles/home.module.scss'
-import acainokilo from '../assets/acainokilo.png'
+import styles from '../../styles/home.module.scss'
+import acainokilo from '../../assets/acainokilo.png'
 import Link from "next/link";
-import { FormEvent, useContext } from "react";
-import { AuthContext } from '../contexts/AuthContext';
-import { sign } from "crypto";
 
-export default function Home() {
-  const {SignIn} = useContext (AuthContext) 
-
-  async function handleLogin(event:FormEvent){
-    event.preventDefault()
-
-    let data = {
-      email: 'teste@teste.com',
-      password: '123123'
-    }
-
-   await SignIn(data);
-  }
-
+export default function SignUp() {
   return (
 
     <>
@@ -36,13 +20,19 @@ export default function Home() {
         backgroundColor={'#8B008B'}
       >
         <Head>
-          <title>Açai no kilo - Faça seu login</title>
+          <title>Faça seu cadastro agora</title>
         </Head>
         <div className={styles.containerCenter}>
           <Image src={acainokilo} alt="Logo Sujeito Pizzaria" />
 
           <div className={styles.login}>
-            <form onSubmit={handleLogin}>
+            <h1>Criando sua conta</h1>
+            <form>
+
+              <Input
+                placeholder='Digite seu nome'
+                type="text"
+              />
 
               <Input
                 placeholder='Digite seu email'
@@ -58,12 +48,11 @@ export default function Home() {
                 type='submit'
                 loading={false}
               >
-                Acessar
+                Cadastrar
               </Button>
-              
             </form>
-            <Link href='/signup' legacyBehavior>
-              <a className={styles.text}>Não possui uma conta? Cadastre-se</a>
+            <Link href={'/'} legacyBehavior>
+            <a className={styles.text}>Já possui uma conta? Faça o login!</a>
             </Link>
           </div>
         </div>

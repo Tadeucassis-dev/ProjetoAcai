@@ -9,6 +9,15 @@
       {
         "label": "off"
       }
+    ],
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "border: 1px solid color( rgb(36, 3, 78))",
+          "border: 1px solid color #fff"
+        ]
+      }
     ]
   }
 }
