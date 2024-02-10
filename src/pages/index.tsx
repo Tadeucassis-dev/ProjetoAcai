@@ -6,22 +6,35 @@ import { Button } from "@/components/ui/button";
 import styles from '../styles/home.module.scss'
 import acainokilo from '../assets/acainokilo.png'
 import Link from "next/link";
-import { FormEvent, useContext } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { AuthContext } from '../contexts/AuthContext';
-import { sign } from "crypto";
 
 export default function Home() {
   const {SignIn} = useContext (AuthContext) 
 
+  const [email, setEmail] = useState ('');
+  const [password, setPassword] = useState('');
+
+  const [loading, setLoading] = useState(false)
+
   async function handleLogin(event:FormEvent){
     event.preventDefault()
 
+    if(email === '' || password === ''){
+      alert("preencha os dados")
+      return;
+    }
+
+    setLoading(true);
+
     let data = {
-      email: 'teste@teste.com',
-      password: '123123'
+      email,
+      password
     }
 
    await SignIn(data);
+
+   setLoading(false);
   }
 
   return (
@@ -47,16 +60,20 @@ export default function Home() {
               <Input
                 placeholder='Digite seu email'
                 type="text"
+                value={email}
+                onChange={(e)=> setEmail(e.target.value)}
               />
 
               <Input
                 placeholder='Digite sua senha'
                 type="password"
+                value={password}
+                onChange={(e)=> setPassword(e.target.value)}
               />
 
               <Button
                 type='submit'
-                loading={false}
+                loading={loading}
               >
                 Acessar
               </Button>
