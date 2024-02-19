@@ -8,19 +8,20 @@ import acainokilo from '../assets/acainokilo.png'
 import Link from "next/link";
 import { FormEvent, useContext, useState } from "react";
 import { AuthContext } from '../contexts/AuthContext';
+import { canSSRGuest } from "@/utils/canSSRGuest";
 
 export default function Home() {
-  const {SignIn} = useContext (AuthContext) 
+  const { SignIn } = useContext(AuthContext)
 
-  const [email, setEmail] = useState ('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const [loading, setLoading] = useState(false)
 
-  async function handleLogin(event:FormEvent){
+  async function handleLogin(event: FormEvent) {
     event.preventDefault()
 
-    if(email === '' || password === ''){
+    if (email === '' || password === '') {
       alert("preencha os dados")
       return;
     }
@@ -32,9 +33,9 @@ export default function Home() {
       password
     }
 
-   await SignIn(data);
+    await SignIn(data);
 
-   setLoading(false);
+    setLoading(false);
   }
 
   return (
@@ -52,7 +53,7 @@ export default function Home() {
           <title>Açai no kilo - Faça seu login</title>
         </Head>
         <div className={styles.containerCenter}>
-          <Image src={acainokilo} alt="Logo Sujeito Pizzaria" />
+          <Image src={acainokilo} alt="Logo Sujeito Pizzaria" priority={true} />
 
           <div className={styles.login}>
             <form onSubmit={handleLogin}>
@@ -61,14 +62,14 @@ export default function Home() {
                 placeholder='Digite seu email'
                 type="text"
                 value={email}
-                onChange={(e)=> setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
 
               <Input
                 placeholder='Digite sua senha'
                 type="password"
                 value={password}
-                onChange={(e)=> setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
 
               <Button
@@ -77,7 +78,7 @@ export default function Home() {
               >
                 Acessar
               </Button>
-              
+
             </form>
             <Link href='/signup' legacyBehavior>
               <a className={styles.text}>Não possui uma conta? Cadastre-se</a>
@@ -88,3 +89,9 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {}
+  }
+})

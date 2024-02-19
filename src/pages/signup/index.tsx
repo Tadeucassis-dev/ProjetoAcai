@@ -6,9 +6,12 @@ import { Button } from "@/components/ui/button";
 import styles from '../../styles/home.module.scss'
 import acainokilo from '../../assets/acainokilo.png'
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 
 export default function SignUp() {
+  const{ SignUp } = useContext(AuthContext)
+
   const [name,setName] = useState('')
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
@@ -22,6 +25,16 @@ export default function SignUp() {
     }
 
     setLoading(true)
+
+    let data = {
+      name,
+      email,
+      password
+    }
+
+    await SignUp(data)
+
+    setLoading(false);
 
   }
 
@@ -40,7 +53,7 @@ export default function SignUp() {
           <title>Faça seu cadastro agora</title>
         </Head>
         <div className={styles.containerCenter}>
-          <Image src={acainokilo} alt="Logo Sujeito Pizzaria" />
+        <Image src={acainokilo} alt="Logo Sujeito Pizzaria" priority={true} />
 
           <div className={styles.login}>
             <h1>Criando sua conta</h1>
