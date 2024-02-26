@@ -38,7 +38,7 @@ export const AuthContext = createContext({} as AuthContextData)
 export function signOut() {
   try {
     destroyCookie(undefined, '@nextauth.token')
-    Router.push('/')
+    Router.push('')
   } catch {
     console.log('erro ao deslogar')
   }

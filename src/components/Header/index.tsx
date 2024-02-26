@@ -20,10 +20,10 @@ export function Header() {
         alignItems='center'
         paddingTop='1rem'
       >
-        <Box marginRight={1}>
+        <Box>
           <Link href='/dashboard' >
             <div style={{ cursor: 'pointer' }}>
-              <Image src='/acainokilo.png' alt='' width={190} height={60} />
+              <Image src='/acainokilo.png' alt='' width={160} height={60} />
             </div>
           </Link>
         </Box>

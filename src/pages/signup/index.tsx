@@ -8,6 +8,7 @@ import acainokilo from '../../assets/acainokilo.png'
 import Link from "next/link";
 import { FormEvent, useContext, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
+import Footer from "@/components/Footer";
 
 export default function SignUp() {
   const{ SignUp } = useContext(AuthContext)
@@ -93,6 +94,7 @@ export default function SignUp() {
             </Link>
           </div>
         </div>
+        <Footer/>
       </Box>
     </>
   );

@@ -9,6 +9,7 @@ import Link from "next/link";
 import { FormEvent, useContext, useState } from "react";
 import { AuthContext } from '../contexts/AuthContext';
 import { canSSRGuest } from "@/utils/canSSRGuest";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const { SignIn } = useContext(AuthContext)
@@ -85,6 +86,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        <Footer/>
       </Box>
     </>
   );

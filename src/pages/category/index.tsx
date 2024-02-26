@@ -2,6 +2,9 @@ import { Header } from "@/components/Header";
 import Head from "next/head";
 import { VStack, Text, Input, FormControl, Button } from '@chakra-ui/react';
 import { useState, FormEvent } from 'react';
+import { setupAPIClient } from "@/services/api";
+import { toast } from 'react-toastify'
+import Footer from "@/components/Footer";
 
 export function Category() {
   const [name, setName] = useState('')
@@ -9,7 +12,17 @@ export function Category() {
   async function handleRegister(event: FormEvent) {
     event.preventDefault();
 
-    alert('categoria' + name)
+    if (name === '') {
+      return;
+    }
+
+    const apiClient = setupAPIClient();
+    await apiClient.post('/category', {
+      name
+    })
+
+    toast.success('Categoria cadastrada com sucesso!')
+    setName('');
   }
 
   return (
@@ -30,13 +43,14 @@ export function Category() {
 
         >
           <Text
+            marginLeft={6}
             color='#fff'
             fontSize={26}
           >
             Cadastrar Categoria
           </Text>
 
-          <form onSubmit={handleRegister}  className="form">
+          <form onSubmit={handleRegister} className="form">
             <FormControl
               display='flex'
               flexDirection='column'
@@ -66,7 +80,7 @@ export function Category() {
           </form>
         </VStack>
       </div>
-
+      <Footer />
     </>
   )
 }

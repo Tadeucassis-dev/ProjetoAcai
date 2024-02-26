@@ -24,3 +24,5 @@ export function Button({ loading, children, ...rest }: ButtonProps) {
     </button>
   )
 }
+
+export default Button;
